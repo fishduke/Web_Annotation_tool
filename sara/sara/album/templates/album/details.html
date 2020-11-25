@@ -1,0 +1,136 @@
+{% extends 'album/base.html' %}
+{% block body%}
+
+
+<div class="container">
+    <div class="row profile">
+  
+  </div>
+</div>
+<div class="container">
+<div class="row-content profile">
+  <div class="col-md-3">
+      <div class="profile-sidebar">
+        <!-- SIDEBAR USERPIC -->
+        <div class="profile-userpic">
+          <img src="{{detailObject.logo.url}}" class="img-responsive" alt="">
+        </div>
+        <!-- END SIDEBAR USERPIC -->
+        <!-- SIDEBAR USER TITLE -->
+        <div class="profile-usertitle">
+          <div class="profile-usertitle-name">
+            {{detailObject.title}}
+          </div>
+          <div class="profile-usertitle-job">
+            {{detailObject.genre}}
+          </div>
+        </div>
+        <!-- END SIDEBAR USER TITLE -->
+        <!-- SIDEBAR BUTTONS -->
+        <div class="profile-userbuttons">
+         <form action="{% url 'album:remove_album' detailObject.id%}" method="POST">
+			{%csrf_token%}
+			<input type="submit" value="delete" class="btn btn-outline-3 btn-sm">
+			</form> 
+        </div>
+        <!-- END SIDEBAR BUTTONS -->
+        <!-- SIDEBAR MENU -->
+  
+        <!-- END MENU -->
+      </div>
+    </div>
+    <div class="col-md-9">
+            <div class="profile-content">
+				<h5 class="text-center"><a data-toggle="modal" data-target="#myModal" class="btn btn-outline-2 btn-xl page-scroll">Add Songs Now!</a></h5>
+
+
+
+			<div class="row">
+			{% for item in detailObject.song_set.all%}
+				<div class="panel panel-default">
+					  <div class="panel-body">
+					    <div class="col-md-4">
+					    	<h4 class="text-center">{{item.song_title}}</h4>
+					    </div>
+					    <div class="col-md-offset-4 col-md-2">
+		
+            <a href="{{item.file.url}}" value="play" class="btn btn-outline-2"><span class="glyphicon glyphicon-play"></span> Play</a>
+          
+          </div>
+           <div class="col-md-2">
+					    	<form action="{%url 'album:remove_song' detailObject.id item.id %}" method="POST" class="col-xs-12">
+                {%csrf_token%}
+                <button type="submit" value="delete" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Trash</button>
+              </form>
+					    </div>
+					  </div>
+				</div>
+			{%endfor%}
+			</div>
+
+
+
+            </div>
+
+
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-3" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Song</h4>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'album:add_song' detailObject.id %}" method="POST" enctype="multipart/form-data">
+        	{%csrf_token%}
+     <div class="form-group">   	
+    <input type="file" name="file" required id="id_file"  class="file">
+    <div class="input-group col-xs-12">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-music"></i></span>
+      <input type="text" class="form-control input-lg" disabled placeholder="Upload Image">
+      <span class="input-group-btn">
+        <button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search"></i> Browse</button>
+      </span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Title</label>
+    <input type="text" class="form-control" name="song_title" required maxlength="30" id="id_song_title" placeholder="Title">
+</div>
+ 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save </button>
+         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{%endblock%}
+<!--
+<img src="{{detailObject.logo.url}}" >
+<h1>{{detailObject.title}}</h1>
+<h2>{{detailObject.artist}}</h2>
+<h3>{{detailObject.genre}}</h3>
+<ul>
+	{% for item in detailObject.song_set.all%}
+	<li><audio controls><source src="{{item.file.url}}" type="audio/mp3"></audio>{{item.song_title}}</li>
+	<form action="{%url 'album:remove_song' detailObject.id item.id %}" method="POST">
+		{%csrf_token%}
+		<input type="submit" value="X">
+	</form>
+	{%endfor%}
+</ul>
+<form action="{% url 'album:remove_album' detailObject.id%}" method="POST">
+	{%csrf_token%}
+	<input type="submit" value="delete">
+</form>
+<a href="{% url 'album:add_song' detailObject.id %}">Add song</a>-->
+

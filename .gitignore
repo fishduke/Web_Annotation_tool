@@ -1,1 +1,2 @@
-django_gunicorn/django_gunicorn/annotation/snapshots
+django_gunicorn/django_gunicorn/annotation/snapshots/keras/*.h5
+django_gunicorn/django_gunicorn/annotation/snapshots/tensorflow/*.h5

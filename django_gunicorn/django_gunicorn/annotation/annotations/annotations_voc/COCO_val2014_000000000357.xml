@@ -1,0 +1,15 @@
+<annotation>
+    <folder>Pictures</folder>
+    <filename>COCO_val2014_000000000357.jpg</filename>
+    <path>C:\Users\fishd\Pictures\COCO_val2014_000000000357.jpg</path>
+    <source>
+        <database>Unknown</database>
+    </source>
+    <size>
+        <width>500</width>
+        <height>170</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+
+</annotation>

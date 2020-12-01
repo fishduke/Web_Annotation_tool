@@ -78,3 +78,19 @@ Slack: https://join.slack.com/t/annomage/shared_invite/zt-dh4ca9du-4VOcwUMCSNA6l
 2) [Keras implementation of RetinaNet object detection](https://github.com/fizyr/keras-retinanet)
 
 3) [Computer Vision Group](https://cvgldce.github.io/), L.D. College of Engineering
+
+
+=====================================================================================
+File "C:\Users\fishd\.conda\envs\tarocat\lib\site-packages\keras\backend\tensorflow_backend.py", line 703, in is_tensor
+    return isinstance(x, tf_ops._TensorLike) or tf_ops.is_dense_tensor_like(x)
+AttributeError: module 'tensorflow.python.framework.ops' has no attribute '_TensorLike'
+
+>>> 해결방법 아래 <<<
+
+from tensorflow.python.framework import tensor_util
+def is_tensor(x):                                                                                                                                                      
+    return tensor_util.is_tensor(x)
+    #return isinstance(x, tf_ops._TensorLike) or tf_ops.is_dense_tensor_like(x)
+
+=====================================================================================
+conda install keras
